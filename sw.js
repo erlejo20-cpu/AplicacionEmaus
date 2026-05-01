@@ -5,8 +5,8 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Mantiene la app funcionando online
-  e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
-  );
+  // Simplemente dejamos pasar la petición al servidor.
+  // No intentamos usar el cache vacío, así evitamos el error de "Sin conexión"
+  // mientras el servidor de Render se está despertando.
+  e.respondWith(fetch(e.request));
 });
